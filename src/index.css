@@ -1,0 +1,345 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 8rem; /* 128px - better anchor positioning */
+  }
+  
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    line-height: 1.6;
+  }
+
+  /* Scroll offset for all sections with IDs */
+  section[id] {
+    scroll-margin-top: 8rem; /* 128px offset for sticky header + padding */
+  }
+
+  /* Specific scroll offsets for different screen sizes */
+  @media (max-width: 768px) {
+    section[id] {
+      scroll-margin-top: 6rem; /* 96px for mobile header */
+    }
+  }
+
+  @media (min-width: 769px) {
+    section[id] {
+      scroll-margin-top: 10rem; /* 160px for desktop header with top bar */
+    }
+  }
+}
+
+@layer utilities {
+  .text-shadow {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .text-shadow-lg {
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  }
+  
+  .bg-gradient-radial {
+    background: radial-gradient(circle, var(--tw-gradient-stops));
+  }
+  
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  .animate-bounce-slow {
+    animation: bounce 3s infinite;
+  }
+  
+  .animate-pulse-slow {
+    animation: pulse 4s infinite;
+  }
+  
+  .animate-ping-slow {
+    animation: ping 3s infinite;
+  }
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+  }
+  
+  .backdrop-blur-xs {
+    backdrop-filter: blur(2px);
+  }
+  
+  .shadow-3xl {
+    box-shadow: 0 35px 60px -12px rgba(0, 0, 0, 0.25);
+  }
+  
+  .tracking-tight {
+    letter-spacing: -0.025em;
+  }
+  
+  .tracking-wide {
+    letter-spacing: 0.025em;
+  }
+
+  /* Custom scroll offset utilities */
+  .scroll-offset-header {
+    scroll-margin-top: 6rem; /* 96px for header */
+  }
+  
+  .scroll-offset-large {
+    scroll-margin-top: 8rem; /* 128px for sections that need more space */
+  }
+
+  /* Mobile bottom padding for fixed CTA */
+  @media (max-width: 768px) {
+    .mobile-bottom-padding {
+      padding-bottom: 5rem; /* 80px for mobile CTA button */
+    }
+  }
+
+  /* Smooth scroll behavior for anchor links */
+  .smooth-scroll {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #f97316, #ea580c);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #ea580c, #c2410c);
+}
+
+/* Smooth transitions for all elements */
+* {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+/* Focus styles */
+button:focus,
+a:focus,
+input:focus,
+textarea:focus,
+select:focus {
+  outline: 2px solid #f97316;
+  outline-offset: 2px;
+}
+
+/* Loading animation */
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: calc(200px + 100%) 0;
+  }
+}
+
+.shimmer {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200px 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* Mobile CTA button animations */
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3);
+  }
+  50% {
+    box-shadow: 0 6px 20px rgba(34, 197, 94, 0.5);
+  }
+}
+
+.animate-glow {
+  animation: glow 3s ease-in-out infinite;
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  /* Ensure mobile CTA doesn't interfere with content */
+  body {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  
+  /* Universal mobile button styles */
+  .mobile-btn {
+    font-size: 14px !important;
+    padding: 8px 12px !important;
+    border-radius: 8px !important;
+    line-height: 1.2 !important;
+    width: 100% !important;
+    max-width: 90% !important;
+    margin: 0 auto 12px auto !important;
+    min-height: 44px !important; /* iOS touch target minimum */
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  
+  /* Mobile icon sizes within buttons */
+  .mobile-btn svg {
+    width: 18px !important;
+    height: 18px !important;
+    margin-right: 6px !important;
+  }
+  
+  /* Mobile spacing */
+  .mobile-spacing > * + * {
+    margin-top: 12px;
+  }
+  
+  /* Touch-friendly tap targets */
+  button, a[role="button"], .btn {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Hide hero elements on mobile */
+  .hide-mobile {
+    display: none !important;
+  }
+  
+  /* Mobile hero adjustments */
+  .mobile-hero-content {
+    text-align: center;
+    padding: 1rem;
+  }
+  
+  .mobile-hero-content h1 {
+    font-size: 2.5rem !important;
+    line-height: 1.1 !important;
+    margin-bottom: 1rem !important;
+  }
+  
+  .mobile-hero-content p {
+    font-size: 1rem !important;
+    line-height: 1.4 !important;
+    margin-bottom: 1.5rem !important;
+  }
+}
+
+/* Desktop button styles */
+@media (min-width: 769px) {
+  .desktop-btn {
+    padding: 12px 20px;
+    font-size: 16px;
+  }
+}
+
+/* Mobile-specific button containers */
+@media (max-width: 768px) {
+  .mobile-btn-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    max-width: 90%;
+    margin: 0 auto;
+  }
+  
+  .mobile-btn-container > * {
+    width: 100%;
+    margin: 0;
+  }
+}
+
+/* Partners section logo scroll animation - OPTIMIZED */
+@keyframes scroll-logos {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll-logos {
+  animation: scroll-logos 60s linear infinite;
+  will-change: transform; /* Optimize for animations */
+}
+
+.animate-scroll-logos:hover {
+  animation-play-state: paused;
+}
+
+/* Logo optimization styles */
+.logo-container {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 120px;
+  height: 60px;
+}
+
+/* Responsive logo sizing */
+@media (max-width: 640px) {
+  .animate-scroll-logos img {
+    height: 40px !important;
+    max-width: 100px !important;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .animate-scroll-logos img {
+    height: 48px !important;
+    max-width: 110px !important;
+  }
+}
+
+@media (min-width: 1025px) {
+  .animate-scroll-logos img {
+    height: 56px !important;
+    max-width: 140px !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .animate-scroll-logos img {
+    filter: contrast(1.2) !important;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .animate-scroll-logos {
+    animation: none;
+  }
+  
+  .animate-scroll-logos img {
+    filter: none !important;
+  }
+}
+
+/* Print styles for logos */
+@media print {
+  .animate-scroll-logos {
+    animation: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  
+  .animate-scroll-logos img {
+    filter: none !important;
+    max-width: 80px !important;
+    height: auto !important;
+  }
+}
